@@ -1,0 +1,29 @@
+<% include ./particles/header %>
+        <div class="container">
+           <div class="row">
+               <% patients.forEach((patient)=>{ %>
+                <div class="col-xl-4 col-lg-3 col-md-3 col-sm-1">
+
+                        <div class="card text-white bg-success mb-3" style="max-width: 100%;">
+                                <div class="card-header"><%=patient.email%></div>
+                                <div class="card-body">
+                                  <h5 class="card-title"><%=patient.name%></h5>
+                                  <p class="card-title"><%=patient.phone%></p>
+                                  <p class="card-title"><%=patient.address%></p>
+                                  <div class="btn-main">
+                                        <ul>
+                                            <li class="edit"><a href="/patient/edit/<%=patient._id%>"><button class="btn btn-outline-primary">Edit</button></a></li>
+                                            <li class="delete">
+                                                <form action="/patient/delete/<%=patient._id%>?_method=DELETE" method="POST">
+                                                    <button class="btn btn-outline-danger">Delete</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                        </div>
+                </div>
+                       <%})%>
+                   </div>
+        </div>
+<% include ./particles/footer %>

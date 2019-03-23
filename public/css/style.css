@@ -1,0 +1,17 @@
+.main{
+    width: 500px;
+    margin: 0 auto;
+}
+.btn-main{
+    display: inline-block;
+}
+.btn-main ul li {
+    width: 50%;
+    list-style: none;
+}
+.edit{
+    float: left;
+}
+.delete{
+    float: left;
+}
