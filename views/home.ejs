@@ -1,6 +1,18 @@
 <% include ./particles/header %>
         <div class="container">
-           <div class="row">
+                <!-- Success Flash -->
+                <% if(success && success.length > 0){ %>
+                    <div class="alert alert-success" role="alert">
+                            <%=success%> 
+                           </div>
+                <%}%>
+                <!-- If No patient ,then a link tag appear on the scrren to Add new patient -->
+                <% if(patients.length === 0){%>
+                    <div class="alert alert-success" role="alert">
+                            <a href="/patient/newpatient">Add a new Patient</a>
+                           </div>
+                <%} %>
+           <div class="row">                
                <% patients.forEach((patient)=>{ %>
                 <div class="col-xl-4 col-lg-3 col-md-3 col-sm-1">
 

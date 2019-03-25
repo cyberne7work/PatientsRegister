@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const session      = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const methodOverride = require('method-override');
+const Flash         =require('connect-flash');
 const Patient = require("./models/patient");
 const curdPatient = require("./routes/patient");
 const authPatient = require("./routes/authPatient");
@@ -18,12 +19,12 @@ index.use(express.static("public"));
 // Set to view templetes in ejs file format
 index.set("view engine","ejs");
 // Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
-index.use(bodyParser({Urlencoded:true}));
+index.use(bodyParser.urlencoded({extended:true}));
 index.use(methodOverride("_method"));
 
-mongoose.connect("mongodb://localhost/patientregister",{useNewUrlParser:true})
+mongoose.connect("mongodb://vishal:vishal123@ds123196.mlab.com:23196/patientregister",{useNewUrlParser:true,useCreateIndex: true,})
     .then(()=>{
-        console.log("Server is Started");
+        console.log("Connected to the database");
     })
     .catch((err)=>{
         console.log(err);
@@ -36,10 +37,17 @@ index.use(session({
     saveUninitialized: true,
     store:new MongoStore({ mongooseConnection: mongoose.connection }),
     cookie: { 
-                sameSite:true,
-                secure:false
+            sameSite:true,
+            secure:false
     }
 }));
+index.use(Flash());
+
+index.use(async (req,res,next)=>{
+    res.locals.error=req.flash("error");
+    res.locals.success=req.flash("success");
+    next()
+})
 
 index.use(async (req,res,next)=>{
         if(req.session.patient){

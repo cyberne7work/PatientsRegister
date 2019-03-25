@@ -1,11 +1,10 @@
-<% include ./particles/header %>
+<% include ./particles/headermain %>
         <div class="container">
-            <%if(currentPatient){%>
-                <form action="/patient/logout" method="POST">
-                    <button>Logout</button>
-                </form>
+                <% if(success && success.length > 0){ %>
+                    <div class="alert alert-success" role="alert">
+                            <%=success%> 
+                           </div>
                 <%}%>
-            
             <div class="row">
                     <% patients.forEach((patient)=>{ %>
                      <div class="col-xl-4 col-lg-3 col-md-3 col-sm-1">

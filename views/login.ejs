@@ -1,6 +1,11 @@
 <% include ./particles/header %>
         <div class="container">
             <div class="main">
+                    <% if(error && error.length > 0){ %>
+                        <div class="alert alert-danger" role="alert">
+                                <%=error%> 
+                               </div>
+                    <%}%>
                 <form action="/patient/login" method="POST">
                     <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
